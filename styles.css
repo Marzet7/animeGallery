@@ -1,0 +1,21 @@
+body {
+    max-width: 80%;
+    margin: auto;
+}
+
+#parent {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px;
+    text-align: center;
+}
+
+#parent > div {
+    border: solid black 1px;
+    padding: 25px;
+}
+
+#parent img {
+    width: 200px;
+    height: 300px;
+}
