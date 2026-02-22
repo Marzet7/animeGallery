@@ -2,6 +2,7 @@ const animeList = [];
 await getAnime();
 
 
+
 const radios = document.querySelectorAll('input[type="radio"]');
 
 radios.forEach(radio => {
@@ -12,7 +13,7 @@ radios.forEach(radio => {
 
 const parent = document.getElementById("parent");
 
-
+loadAnime(5);
 
 async function getAnime() {
     const promise = await fetch("https://api.jikan.moe/v4/top/anime");
@@ -41,7 +42,7 @@ function loadAnime(count) {
 
 function loadCard(anime) {
     const div = document.createElement("div");
-    //div.classList.add("card");
+    div.classList.add("card");
     
     const image = document.createElement("img");
     image.src = anime["images"]["jpg"]["image_url"];
@@ -52,7 +53,13 @@ function loadCard(anime) {
     div.appendChild(title)
 
     const synopsis = document.createElement("p");
-    synopsis.innerText = anime["synopsis"];
+    let synText = anime["synopsis"];
+    if (synText.length > 300) {
+        synText = synText.substring(0,300);
+        synText += "..."
+    }
+
+    synopsis.innerText = synText;
     div.appendChild(synopsis);
 
     parent.appendChild(div);

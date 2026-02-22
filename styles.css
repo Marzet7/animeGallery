@@ -10,12 +10,17 @@ body {
     text-align: center;
 }
 
-#parent > div {
+.card {
     border: solid black 1px;
     padding: 25px;
 }
 
-#parent img {
+.card > h1 {
+    height: 60px;
+    font-size: 24px;
+}
+
+.card img {
     width: 200px;
     height: 300px;
 }
