@@ -17,7 +17,9 @@ loadAnime(5);
 radios.forEach(radio => {
     radio.addEventListener("change", (e) => {
         titleCount = e.target.value
+        currentPage = 1;
         loadAnime();
+        
     });
 });
 
@@ -35,10 +37,6 @@ function decreasePage() {
 
 async function increasePage() {
     currentPage++;
-    if (currentPage * titleCount > animeList.length) {
-        const num = (animeList.length/25) + 1;
-        await getAnime(num);
-    }
     loadAnime();
 }
 
@@ -53,18 +51,22 @@ async function getAnime(page) {
     console.log(animeList)
 }
 
-function loadAnime() {
+async function loadAnime() {
     while (parent.hasChildNodes()) {
         parent.removeChild(parent.firstChild)
     }
-    
+
+    if (currentPage * titleCount > animeList.length) {
+        console.log("load more")
+        const num = (animeList.length/25) + 1;
+        await getAnime(num);
+    }
     
     for (let i = (currentPage-1) * titleCount; i < currentPage * titleCount; i++) {
         const anime = animeList[i]
         console.log(anime)
 
-
-        loadCard(anime)
+        await loadCard(anime)
         pageCounter.innerText = currentPage;
     }
 }
@@ -81,15 +83,9 @@ function loadCard(anime) {
     title.innerText = anime["title"]
     div.appendChild(title)
 
-    const synopsis = document.createElement("p");
-    let synText = anime["synopsis"];
-    if (synText.length > 300) {
-        synText = synText.substring(0,300);
-        synText += "..."
-    }
-
-    synopsis.innerText = synText;
-    div.appendChild(synopsis);
+    const score = document.createElement("h2");
+    score.innerText = anime["score"] + "⭐";
+    div.appendChild(score);
 
     parent.appendChild(div);
 
