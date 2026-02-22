@@ -3,10 +3,12 @@ const radios = document.querySelectorAll('input[type="radio"]');
 const buttonPrev = document.getElementById("btn-prev-page");
 const buttonNext = document.getElementById("btn-next-page");
 const pageCounter = document.getElementById("current-page");
+const checkCarousel = document.getElementById("ck-carousel");
 
 let titleCount = 5;
 let currentPage = 1;
 let animeList = [];
+let interval;
 
 await getAnime(1);
 
@@ -19,8 +21,20 @@ radios.forEach(radio => {
         loadAnime();
     });
 });
+
 buttonPrev.addEventListener("click", decreasePage);
 buttonNext.addEventListener("click", increasePage);
+
+checkCarousel.addEventListener("click", (e) => {
+    if (checkCarousel.checked) {
+        interval = setInterval(increasePage, 5000);
+    }
+    else {
+        clearInterval(interval);
+    }
+})
+
+//////////////
 
 function decreasePage() {
     if (currentPage > 1) {
