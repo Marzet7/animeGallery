@@ -1,6 +1,7 @@
 body {
     max-width: 80%;
     margin: auto;
+    margin-bottom: 50px;
 }
 
 nav {
@@ -10,4 +11,53 @@ nav {
     margin-bottom: 5px;
     background-color: rgb(29, 120, 199);
     color: aliceblue;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 50px 500px 1fr;
+    gap: 20px;
+
+    grid-template-areas: 
+    "a1 a1"
+    "a2 a3"
+    "a4 a4";
+}
+
+#sec-title {
+    grid-area: a1;
+}
+
+#sec-img {
+    grid-area: a2;
+}
+
+#sec-img img {
+    height: 500;
+}
+
+#sec-syn {
+    grid-area: a3;
+}
+
+#sec-char {
+    grid-area: a4;
+}
+
+#anime-characters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+#anime-characters > div {
+    display: flex;
+    gap: 10px;
+    border: 1px solid black;
+}
+
+#anime-characters img {
+    height: 200px;
+    width: 150px;
 }

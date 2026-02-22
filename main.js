@@ -41,13 +41,13 @@ async function getAnime(page) {
         animeList = JSON.parse(cached);
     }
 
-    // Fetch if we don't have enough items for the requested page
     if (animeList.length < page * 25) {
         await fetchAnime(page);
         localStorage.setItem("animeList", JSON.stringify(animeList));
+        console.log("Fetched")
     }
 
-    console.log(animeList);
+    //console.log(animeList);
 }
 
 async function fetchAnime(page) {
