@@ -1,22 +1,49 @@
-const animeList = [];
-await getAnime();
-
-
-
-const radios = document.querySelectorAll('input[type="radio"]');
-
-radios.forEach(radio => {
-    radio.addEventListener("change", (e) => {
-        loadAnime(e.target.value);
-    });
-});
-
 const parent = document.getElementById("parent");
+const radios = document.querySelectorAll('input[type="radio"]');
+const buttonPrev = document.getElementById("btn-prev-page");
+const buttonNext = document.getElementById("btn-next-page");
+const pageCounter = document.getElementById("current-page");
+
+let titleCount = 5;
+let currentPage = 1;
+const animeList = [];
+
+await getAnime(1);
 
 loadAnime(5);
 
-async function getAnime() {
-    const promise = await fetch("https://api.jikan.moe/v4/top/anime");
+
+
+radios.forEach(radio => {
+    radio.addEventListener("change", (e) => {
+        titleCount = e.target.value
+        loadAnime();
+    });
+});
+
+buttonPrev.addEventListener("click", decreasePage);
+buttonNext.addEventListener("click", increasePage);
+
+
+function decreasePage() {
+    if (currentPage > 1) {
+        currentPage--;
+    }
+    loadAnime();
+    
+}
+
+async function increasePage() {
+    currentPage++;
+    if (currentPage * titleCount > animeList.length) {
+        const num = (animeList.length/25) + 1;
+        await getAnime(num);
+    }
+    loadAnime();
+}
+
+async function getAnime(page) {
+    const promise = await fetch(`https://api.jikan.moe/v4/top/anime?page=${page}`);
     const json = await promise.json();
 
     json["data"].forEach(a => {
@@ -26,17 +53,19 @@ async function getAnime() {
     console.log(animeList)
 }
 
-function loadAnime(count) {
+function loadAnime() {
     while (parent.hasChildNodes()) {
         parent.removeChild(parent.firstChild)
     }
     
-    for (let i = 0; i < count; i++) {
+    
+    for (let i = (currentPage-1) * titleCount; i < currentPage * titleCount; i++) {
         const anime = animeList[i]
         console.log(anime)
 
 
         loadCard(anime)
+        pageCounter.innerText = currentPage;
     }
 }
 

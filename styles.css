@@ -3,6 +3,14 @@ body {
     margin: auto;
 }
 
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: rgb(29, 120, 199);
+}
+
 #parent {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

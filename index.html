@@ -7,22 +7,28 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <label for="count1">5</label>
-    <input type="radio" name="count" id="count1" value="5" checked>
-    <label for="count2">10</label>
-    <input type="radio" name="count" id="count2" value="10">
-    <label for="count3">15</label>
-    <input type="radio" name="count" id="count3" value="15">
-    
     <nav>
-        <button id="btn-prev-page"></button>
-        <span id="current-page"></span>
-        <button id="btn-next-page"></button>
+        <div>
+            <span>Titles per page: </span>
+            <label for="count1">5</label>
+            <input type="radio" name="count" id="count1" value="5" checked>
+            <label for="count2">10</label>
+            <input type="radio" name="count" id="count2" value="10">
+            <label for="count3">15</label>
+            <input type="radio" name="count" id="count3" value="15">
+            <label for="count4">20</label>
+            <input type="radio" name="count" id="count4" value="20">
+            <label for="count5">25</label>
+            <input type="radio" name="count" id="count5" value="25">
+        </div>
+        <div>
+            <button id="btn-prev-page">Prev</button>
+            <span id="current-page">1</span>
+            <button id="btn-next-page">Next</button>
+        </div>
     </nav>
     
-    <div id="parent">
-
-    </div>
+    <div id="parent"></div>
 
     <script type="module" src="main.js"></script>
 </body>
