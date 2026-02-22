@@ -19,7 +19,6 @@ radios.forEach(radio => {
         titleCount = e.target.value
         currentPage = 1;
         loadAnime();
-        
     });
 });
 
@@ -32,7 +31,6 @@ function decreasePage() {
         currentPage--;
     }
     loadAnime();
-    
 }
 
 async function increasePage() {
@@ -72,6 +70,9 @@ async function loadAnime() {
 }
 
 function loadCard(anime) {
+    const link = document.createElement("a");
+    link.href = `./detail.html?id=${anime["mal_id"]}`
+
     const div = document.createElement("div");
     div.classList.add("card");
     
@@ -87,7 +88,8 @@ function loadCard(anime) {
     score.innerText = anime["score"] + "⭐";
     div.appendChild(score);
 
-    parent.appendChild(div);
+    link.appendChild(div);
+    parent.appendChild(link);
 
 
 }

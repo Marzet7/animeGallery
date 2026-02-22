@@ -3,12 +3,18 @@ body {
     margin: auto;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
     padding: 10px;
     margin-bottom: 5px;
     background-color: rgb(29, 120, 199);
+    color: aliceblue;
 }
 
 #parent {

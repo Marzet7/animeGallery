@@ -1,0 +1,13 @@
+body {
+    max-width: 80%;
+    margin: auto;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: rgb(29, 120, 199);
+    color: aliceblue;
+}
