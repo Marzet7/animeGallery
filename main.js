@@ -6,13 +6,11 @@ const pageCounter = document.getElementById("current-page");
 
 let titleCount = 5;
 let currentPage = 1;
-const animeList = [];
+let animeList = [];
 
 await getAnime(1);
 
 loadAnime(5);
-
-
 
 radios.forEach(radio => {
     radio.addEventListener("change", (e) => {
@@ -21,10 +19,8 @@ radios.forEach(radio => {
         loadAnime();
     });
 });
-
 buttonPrev.addEventListener("click", decreasePage);
 buttonNext.addEventListener("click", increasePage);
-
 
 function decreasePage() {
     if (currentPage > 1) {
@@ -39,14 +35,28 @@ async function increasePage() {
 }
 
 async function getAnime(page) {
+    const cached = localStorage.getItem("animeList");
+
+    if (cached !== null) {
+        animeList = JSON.parse(cached);
+    }
+
+    // Fetch if we don't have enough items for the requested page
+    if (animeList.length < page * 25) {
+        await fetchAnime(page);
+        localStorage.setItem("animeList", JSON.stringify(animeList));
+    }
+
+    console.log(animeList);
+}
+
+async function fetchAnime(page) {
     const promise = await fetch(`https://api.jikan.moe/v4/top/anime?page=${page}`);
-    const json = await promise.json();
+        const json = await promise.json();
 
-    json["data"].forEach(a => {
-        animeList.push(a)
-    });
-
-    console.log(animeList)
+        json["data"].forEach(a => {
+            animeList.push(a)
+        });
 }
 
 async function loadAnime() {
